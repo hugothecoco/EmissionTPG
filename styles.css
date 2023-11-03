@@ -1,0 +1,426 @@
+body {
+  background-color: #f5f5f9;
+}
+
+h1 {
+  color: #fd5312;
+  text-align: center;
+  font-family: arial;
+}
+
+p {
+  font-family: Eina01,sans-serif;
+  font-size: 20px;
+}
+
+hw {
+  color: #fd5312;
+  text-align: center;
+  font-family: Poppins;
+}
+
+pw {
+  font-family: Poppins;
+  font-size: 20px;
+}
+
+.text {
+font-family: Poppins;
+}
+
+h2 {
+font-family: Poppins;
+}
+
+.newtrajet {
+        display: inline-block;
+        background-color: #fd5312;
+        border-radius: 30px;
+        border: 4px double #eeeeee;
+        color: #eeeeee;
+        text-align: center;
+        font-size: 15px;
+        padding: 20px;
+        width: 150px;
+        transition: all 0.5s;
+        cursor: pointer;
+        margin: 5px;
+      }
+      .newtrajet span {
+        cursor: pointer;
+        display: inline-block;
+        position: relative;
+        transition: 0.5s;
+      }
+	  
+
+      .newtrajet span:after {
+        content: "\00bb";
+        position: absolute;
+        opacity: 0;
+        top: 0;
+        right: -20px;
+        transition: 0.5s;
+      }
+      .newtrajet:hover {
+        background-color: #fc6c2c;
+		transform: scale(1.05); /* (150% zoom - Note: if the zoom is too large, it will go outside of the viewport) */
+      }
+
+.days {
+        display: inline-block;
+        background-color: #fca480;
+        border-radius: 10px;
+        border: 4px double #eeeeee;
+        color: #eeeeee;
+        text-align: center;
+        font-family: Poppins;
+        font-size: 12px;
+        padding: 5px;
+        width: 80px;
+        transition: all 0.5s;
+        cursor: pointer;
+        margin: 5px;
+      }
+      .days span {
+        cursor: pointer;
+        display: inline-block;
+        position: relative;
+        transition: 0.5s;
+      }
+      .days span:after {
+        content: "\00bb";
+        position: absolute;
+        opacity: 0;
+        top: 0;
+        right: -20px;
+        transition: 0.5s;
+      }
+      .days:hover {
+        background-color: #fc6c2c;
+		transform: scale(1.05); /* (150% zoom - Note: if the zoom is too large, it will go outside of the viewport) */
+      
+      }
+.days.selected {
+  background-color: #fc6c2c;
+}
+
+#container {
+            width: 820px; /* Adjust the width as needed */
+            height: 800x; /* Adjust the height as needed */
+            border: 5px solid #fc7c4b;
+            padding: 5px;
+            border-radius: 10px;
+        }
+
+        .value-box {
+            display: block;
+            margin: 10px 0;
+        }
+
+		.logo {
+			width: 45px; /* Adjust the logo width as needed */
+			margin-right: 10px; /* Add spacing between logo and input */
+      margin-left: 10px;
+			transition: transform .2s; /* Animation */
+		}	
+		
+		.logo:hover {
+		  transform: scale(1.1); /* (150% zoom - Note: if the zoom is too large, it will go outside of the viewport) */
+		}
+
+#totalEmissionContainer {
+    display: none; /* Initially hidden */
+}
+
+#emissionLogo {
+    max-width: 50px; /* Adjust the width as needed */
+}
+
+#totalWeeklyEmission {
+    display: inline; /* Initially inline (hidden) */
+}
+
+.button-77 {
+  align-items: center;
+  appearance: none;
+  background-clip: padding-box;
+  background-color: initial;
+  background-image: none;
+  border-style: none;
+  box-sizing: border-box;
+  color: #fff;
+  cursor: pointer;
+  display: inline-block;
+  flex-direction: row;
+  flex-shrink: 0;
+  font-family: Poppins;
+  font-size: 16px;
+  font-weight: 800;
+  justify-content: center;
+  line-height: 24px;
+  margin: 0;
+  min-height: 64px;
+  outline: none;
+  overflow: visible;
+  padding: 19px 26px;
+  pointer-events: auto;
+  position: relative;
+  text-align: center;
+  text-decoration: none;
+  text-transform: none;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  vertical-align: middle;
+  width: auto;
+  word-break: keep-all;
+  z-index: 0;
+}
+
+@media (min-width: 768px) {
+  .button-77 {
+    padding: 19px 32px;
+  }
+}
+
+.button-77:before,
+.button-77:after {
+  border-radius: 80px;
+}
+
+.button-77:before {
+  background-color: rgba(249, 58, 19, .32);
+  content: "";
+  display: block;
+  height: 100%;
+  left: 0;
+  overflow: hidden;
+  position: absolute;
+  top: 0;
+  width: 100%;
+  z-index: -2;
+}
+
+.button-77:after {
+  background-color: initial;
+  background-image: linear-gradient(92.83deg, #ff7426 0, #f93a13 100%);
+  bottom: 4px;
+  content: "";
+  display: block;
+  left: 4px;
+  overflow: hidden;
+  position: absolute;
+  right: 4px;
+  top: 4px;
+  transition: all 100ms ease-out;
+  z-index: -1;
+}
+
+.button-77:hover:not(:disabled):after {
+  bottom: 0;
+  left: 0;
+  right: 0;
+  top: 0;
+  transition-timing-function: ease-in;
+}
+
+.button-77:active:not(:disabled) {
+  color: #ccc;
+}
+
+.button-77:active:not(:disabled):after {
+  background-image: linear-gradient(0deg, rgba(0, 0, 0, .2), rgba(0, 0, 0, .2)), linear-gradient(92.83deg, #ff7426 0, #f93a13 100%);
+  bottom: 4px;
+  left: 4px;
+  right: 4px;
+  top: 4px;
+}
+
+.button-77:disabled {
+  cursor: default;
+  opacity: .24;
+}
+
+.value-input {
+             padding: 4px;
+             font-size: 12px;
+             border-width: 3px;
+             border-color: #ff4100;
+             background-color: #f5f5f5;
+             width: 40px;
+             color: #000000;
+             margin-left: 10px;
+             margin-right: 10px;
+             border-style: solid;
+             border-radius: 10px;
+             box-shadow: 0px 0px 0px rgba(66,66,66,.75);
+             text-shadow: 0px 0px 0px rgba(66,66,66,.75);
+        }
+         .value-input:focus {
+             outline:none;
+        }
+
+.wrapper-warning {
+  position: fixed;
+  top: 50%; /* Align the top of the warning at 50% from the top */
+  left: 50%; /* Align the left of the warning at 50% from the left */
+  transform: translate(-50%, -50%); /* Center the warning message */
+  z-index: 1000; /* Ensure the warning stays above other elements */
+}
+
+.wrapper-warning .card {
+  width: 650px;
+  height: 120px;
+  background-color: #fff;
+  padding: 10px 20px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  border-left: 5px solid #fd4120;
+  border-radius: 3px;
+  box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+}
+
+.wrapper-warning .card .subject {
+  margin-right: 180px;
+  padding-left: 20px; /* Add padding to the left side of the text */
+}
+
+.wrapper-warning .card .subject p {
+  color: #909092;
+}
+
+.wrapper-warning .card .icon {
+  font-size: 28px;
+  color: #fd4120;
+}
+
+.wrapper-warning .card .icon-times {
+  font-size: 28px;
+  color: #c3c2c7;
+  cursor: pointer;
+}
+
+
+/* CSS for the "Yes" column */
+th:nth-child(4) {
+    text-align: center;
+}
+
+/* CSS for the "Nombre de personne dans la voiture" column */
+th:nth-child(5) {
+    text-align: center;
+}
+
+
+/* Add this CSS to set the width of the text box in the "ami" column */
+#peopleCount_ami input {
+    width: 30px; /* Adjust the width as needed */
+	text-align: center;
+}	
+
+/* Add this CSS to set the width of the text box in the "Zoe" column */
+#peopleCount_zoe input {
+    width: 30px; /* Adjust the width as needed */
+	text-align: center;
+}
+
+/* Add this CSS to set the width of the text box in the "Citadine" column */
+#peopleCount_citadine input {
+    width: 30px; /* Adjust the width as needed */
+	text-align: center;
+}
+
+/* Add this CSS to set the width of the text box in the "SUV" column */
+#peopleCount_SUV input {
+    width: 30px; /* Adjust the width as needed */
+	text-align: center;
+}
+/* Add this CSS to set the width of the text box in the "Tesla" column */
+#peopleCount_tesla input {
+    width: 30px; /* Adjust the width as needed */
+	text-align: center;
+}
+
+th {
+  border: 2px solid rgb(200, 200, 200);
+  padding: 1px;
+  text-align: left;
+  font-weight: normal;
+}
+
+body{
+	background-color: #ececec;
+	padding: 0;
+	margin: 0;
+}
+
+
+:root {
+  --scale-factor: 1;
+}
+
+.container2 {
+  height: calc(120px * var(--scale-factor));
+  width: calc(250px * var(--scale-factor));
+  position: relative;
+  transform: translate(-50%, -50%);
+  top: 50%;
+  left: 50%;
+  box-shadow: -7px -7px 15px rgba(255, 255, 255, 0.65), 7px 7px 15px rgba(70, 70, 70, 0.12);
+  border-radius: calc(5px * var(--scale-factor));
+  display: flex;
+  align-items: center;
+}
+
+input[type="checkbox"] {
+  position: relative;
+  -webkit-appearance: none;
+  height: calc(80px * var(--scale-factor));
+  width: calc(160px * var(--scale-factor));
+  border: calc(5px * var(--scale-factor)) solid #ececec;
+  box-shadow: -7px -7px 15px rgba(255, 255, 255, 0.65), 7px 7px 15px rgba(70, 70, 70, 0.12),
+  inset -7px -7px 15px rgba(255, 255, 255, 0.65), inset 7px 7px 15px rgba(70, 70, 70, 0.12);
+  outline: none;
+  cursor: pointer;
+  //left: 50%;
+  border-radius: calc(40px * var(--scale-factor));
+}
+
+input[type="checkbox"]:before,
+input[type="checkbox"]:after {
+  content: "";
+  position: absolute;
+  margin: auto;
+  top: 0;
+  bottom: 0;
+  transition: 0.3s;
+}
+
+input[type="checkbox"]:before {
+  height: calc(50px * var(--scale-factor));
+  width: calc(50px * var(--scale-factor));
+  background-color: #cdcdcd;
+  box-shadow: calc(-7px * var(--scale-factor)) calc(-7px * var(--scale-factor)) calc(15px * var(--scale-factor)) rgba(255, 255, 255, 0.75), calc(7px * var(--scale-factor)) calc(7px * var(--scale-factor)) calc(15px * var(--scale-factor)) rgba(70, 70, 70, 0.12);
+  border-radius: 50%;
+  left: calc(15px * var(--scale-factor));
+}
+
+input[type="checkbox"]:after {
+  height: calc(15px * var(--scale-factor));
+  width: calc(15px * var(--scale-factor));
+  background-color: #7a7a7a;
+  border-radius: 50%;
+  right: calc(-55px * var(--scale-factor));
+}
+
+input[type="checkbox"]:checked:before {
+  left: calc(86px * var(--scale-factor));
+  background-color: #fd4120;
+  position: absolute;
+}
+
+input[type="checkbox"]:checked:after {
+  background-color: #00ff26;
+}
