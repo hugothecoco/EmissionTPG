@@ -1,4 +1,3 @@
-// Define emission factors for each mode of transportation
 const emissionFactors = {
     "Marche": 0,
     "Vélo": 6,
@@ -11,18 +10,38 @@ const emissionFactors = {
     "Scooter thermique": 105,
     "Tesla": 137,
     "Citadine thermique": 240,
-    "SUV": 360
+    "SUV": 360 
 };
 
+function updateEmissionFactors() {
+    const amiValue = parseInt(document.getElementById("my-input_ami").value);
+    const zoeValue = parseInt(document.getElementById("my-input_zoe").value);
+    const teslaValue = parseInt(document.getElementById("my-input_tesla").value);
+    const citadineValue = parseInt(document.getElementById("my-input_citadine").value);
+    const suvValue = parseInt(document.getElementById("my-input_SUV").value);
 
-// Function to calculate the total emission for a day
+    emissionFactors["Citroën Ami"] = 45 / amiValue;
+    emissionFactors["Renault Zoe"] = 95 / zoeValue;
+    emissionFactors["Tesla"] = 137 / teslaValue;
+    emissionFactors["Citadine thermique"] = 240 / citadineValue;
+    emissionFactors["SUV"] = 360 / suvValue;
+}
+
+// Assuming there are event listeners on my-input elements to trigger the update
+document.getElementById("my-input_ami").addEventListener("input", updateEmissionFactors);
+document.getElementById("my-input_zoe").addEventListener("input", updateEmissionFactors);
+document.getElementById("my-input_tesla").addEventListener("input", updateEmissionFactors);
+document.getElementById("my-input_citadine").addEventListener("input", updateEmissionFactors);
+document.getElementById("my-input_SUV").addEventListener("input", updateEmissionFactors);
+
+// Function to calculate the total emission for a day considering updated emission factors
 function calculateEmissionForDay(day) {
     const values = dayValues[day];
     if (!values) {
         return 0; // No values for this day
     }
 
-    // Calculate the total emission for the day
+    // Calculate the total emission for the day with the updated emission factors
     const totalEmission = values.reduce((total, value, index) => {
         const transport = Object.keys(emissionFactors)[index];
         const emissionFactor = emissionFactors[transport];
@@ -44,6 +63,9 @@ document.getElementById("calcul_semaine").addEventListener("click", function() {
     // Show the entire container when the button is clicked
     const totalEmissionContainer = document.getElementById("totalEmissionContainer");
     totalEmissionContainer.style.display = "inline";
+
+    // Update the emission factors before calculating the total week emission
+    updateEmissionFactors();
 
     // Call the function to update the total emission
     updateTotalWeekEmission();
@@ -238,6 +260,64 @@ document.getElementById("saveValue").addEventListener("click", function() {
     }
 });
 
+// Get the 'Aide' button
+const aideButton = document.getElementById("aide");
+
+// Function to create the aide warning
+function createAideWarning() {
+  const aideHTML = `
+    <div class="wrapper-aide">
+      <div class="modal">
+        <div class="card">
+          <div class="subject">
+			<div class="icon"><i class="fas fa-book"></i><wh><span>Mode d'emploi</span></wh></div>
+            
+            <pw>
+				<ul>
+					<li>S&eacutelectionner un jour</li>
+					<li>Entrer les distances parcourues en km pour les transports utilis&eacutes</li>
+					<li>En cas de covoiturage, cliquer sur le bouton et indiquer le nombre de passagers</li>
+					<li>Sauvegarder les trajets du jour</li>
+					<li>R&eacutep&eacuteter le meme proc&eacuted&eacute pour chaque jour de la semaine</li>
+					<li>Calculer l'&eacutemission hebdomadaire</li>
+				</ul>
+			</pw>
+          </div>
+          <div class="icon-times"><i class="fas fa-times"></i></div>
+        </div>
+      </div>
+    </div>`;
+
+  document.body.insertAdjacentHTML("beforeend", aideHTML);
+
+  const newWrapperAide = document.querySelector(".wrapper-aide");
+  newWrapperAide.style.display = "block";
+
+  const iconTimes = newWrapperAide.querySelector(".icon-times");
+  iconTimes.addEventListener("click", function() {
+    newWrapperAide.remove();
+
+    const elementsToEnable = document.querySelectorAll("button, input");
+    elementsToEnable.forEach((element) => {
+      element.disabled = false;
+    });
+  });
+
+  const elementsToDisable = document.querySelectorAll("button, input");
+  elementsToDisable.forEach((element) => {
+    element.disabled = true;
+  });
+}
+
+// Event listener for the 'Aide' button click
+aideButton.addEventListener("click", function() {
+  let existingAide = document.querySelector(".wrapper-aide");
+
+  if (!existingAide) {
+    createAideWarning();
+  }
+});
+
 //calcul sum
 let values = [];
 
@@ -284,68 +364,86 @@ function updateTotalWeekEmission() {
 }
 
 
-    const transportEmissions = {};    
-    const transportTypes = ["Marche","Vélo","Bus/Tram","Train","Vélo électrique","Scooter électrique","Citroën Ami","Renault Zoe","Scooter thermique","Tesla","Citadine thermique","SUV"];
-    const transportFactors = [0,6,6.8,8,22,30,45,95,105,137,240,360];
-let calculationsPerformed = false;
+const sliderEl = document.querySelector("#valueBox3")
+const sliderValue = document.querySelector(".value")
 
-document.getElementById("calcul_semaine").addEventListener("click", function() {
-    
-    const transportEmissionsElement = document.getElementById("transportEmissions");
-    transportEmissionsElement.innerHTML = ""; // Clear previous transport emissions
+sliderEl.addEventListener("input", (event) => {
+  const tempSliderValue = event.target.value; 
+  
+  sliderValue.textContent = tempSliderValue;
+  
+  const progress = (tempSliderValue / sliderEl.max) * 100;
+ 
+  sliderEl.style.background = `linear-gradient(to right, #f50 ${progress}%, #ccc ${progress}%)`;
+})
 
-    for (let i = 1; i <= 12; i++) {
-        const inputId = "valueBox" + i; // Assuming this is the ID for the input box
-        const emissionValue = parseFloat(document.getElementById(inputId).value) || 0;
 
-        if (emissionValue > 0) {
-            const totalEmissionForDay = emissionValue * transportFactors[i - 1];
-            const transportType = transportTypes[i - 1];
+// function progressScript() {
+//   const sliderValue = sliderEl.value;
+//   sliderEl.style.background = `linear-gradient(to right, #f50 ${sliderValue}%, #ccc ${sliderValue}%)`;
+// }
 
-            if (!transportEmissions[transportType]) {
-                transportEmissions[transportType] = 0;
-            }
-            transportEmissions[transportType] += totalEmissionForDay;
-        }
-    }
-
-    // Display the accumulated emissions for each transport type
-    for (const transportType in transportEmissions) {
-        const p = document.createElement("p");
-        p.textContent = `${transportType}: ${transportEmissions[transportType]}g`;
-        transportEmissionsElement.appendChild(p);
-    }
-});
+// progressScript()
 
 // Function to toggle the "Number of people in the car" text box
 function togglePeopleCount(vehicleId) {
     var peopleCount = document.getElementById("peopleCount_" + vehicleId);
+    var numberInput = document.getElementById("my-input_" + vehicleId);
 
-    if (peopleCount.style.display === "block") {
+    if (peopleCount.style.display === "flex") {
         peopleCount.style.display = "none";
         document.getElementById("radioYes_" + vehicleId).checked = false; // Deselect the radio button
+        numberInput.value = 1; // Reset the input value to 1 when the toggle is turned off
     } else {
-        peopleCount.style.display = "block";
+        peopleCount.style.display = "flex";
+        numberInput.value = 2; // Set the input value to 2 when the toggle is turned on
     }
 }
 
-// Add event listeners to all "Yes" radio buttons
-document.getElementById("radioYes_ami").addEventListener("click", function () {
-    togglePeopleCount("ami");
+// Get the toggle checkboxes and the number input containers for all vehicles
+const toggleCheckboxes = document.querySelectorAll('input[type="checkbox"]');
+const numberContainers = document.querySelectorAll('.container_number');
+
+// Add event listeners to all the checkboxes
+toggleCheckboxes.forEach((checkbox, index) => {
+    checkbox.addEventListener("click", function () {
+        togglePeopleCount(checkbox.id.split("_")[1]); // Extract the vehicle ID from the checkbox ID
+        if (this.checked) {
+            numberContainers[index].style.display = "flex";
+            document.getElementById("my-input_" + checkbox.id.split("_")[1]).value = 2; // Set value to 2 when toggle is on
+        } else {
+            numberContainers[index].style.display = "none";
+        }
+    });
 });
 
-document.getElementById("radioYes_zoe").addEventListener("click", function () {
-    togglePeopleCount("zoe");
-});
+// Function to handle the input number stepper
 
-document.getElementById("radioYes_tesla").addEventListener("click", function () {
-    togglePeopleCount("tesla");
-});
+function stepper(btn) {
+    const myInput = btn.parentNode.querySelector("input[type='number']");
+    const vehicleId = myInput.id.split("_")[1]; // Extract the vehicle ID
+    const min = myInput.getAttribute("min");
+    const max = myInput.getAttribute("max");
+    const step = myInput.getAttribute("step");
+    const val = myInput.value;
 
-document.getElementById("radioYes_citadine").addEventListener("click", function () {
-    togglePeopleCount("citadine");
-});
+    const calcStep = btn.id === "increment_" + vehicleId ? step * 1 : step * -1;
+    const newValue = parseInt(val) + parseInt(calcStep);
 
-document.getElementById("radioYes_SUV").addEventListener("click", function () {
-    togglePeopleCount("SUV");
+    if (newValue >= min && newValue <= max) {
+        myInput.value = newValue;
+        // Now newValue holds the updated value for the specific vehicle ID (e.g., ami, zoe, etc.)
+        // You can store it or use it as needed
+    }
+}
+
+// Array of transport names
+const transportNames = ["ami", "zoe", "tesla", "citadine", "SUV"];
+
+// Set default values for each transport
+transportNames.forEach(transport => {
+    const inputNumber = document.getElementById(`my-input_${transport}`);
+    if (inputNumber) {
+        inputNumber.value = 1;
+    }
 });

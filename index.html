@@ -3,7 +3,6 @@
 <head>
 <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
     <link
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css"
@@ -15,227 +14,241 @@
       href="https://fonts.googleapis.com/css2?family=Poppins:wght@500&display=swap"
       rel="stylesheet"
     />
-<link rel="stylesheet" href="styles.css">
+	<link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@600&display=swap" rel="stylesheet">
 <title>Page Title</title>
 </head>
 <body>
 
-<h1>Simulateur TPG</h1>
-<p>Bienvenue sur le simulateur d'&eacutemission hebdomadaire de CO<SUB>2</SUB> en fonction de vos type de transport.</p>
-
-<button id="mybutton" class="button-77">Nouvelle simulation</button>
+<h1>Calculateur d'&eacutemission de CO<SUB>2</SUB></h1>
+<p>Bienvenue sur le simulateur d'&eacutemission hebdomadaire de CO<SUB>2</SUB> en fonction de vos types de transport.</p>
 
 
-<div id="container" style="display : none;">
-	<!--<div id="dayTitle"> selectDay : </div>-->
-<div id="jours">
-	<br/>
-	<button class="days">Lundi</button>
-    <button class="days">Mardi</button>
-    <button class="days">Mercredi</button>
-    <button class="days">Jeudi</button>
-    <button class="days">Vendredi</button>
-    <button class="days">Samedi</button>
-    <button class="days">Dimanche</button>
-	<br/>
-</div>    
-<table style="width:100%">
-    <tr>
-        <th style="width:5%">
-            <img class="logo" src="walking.png" alt="Logo 1">
-        </th>
-        <th style="width:40%">
-            <span class="text">Marche (0 gCO<SUB>2</SUB>/km)</span>
-        </th>
-        <th style="width:10%">
-            <input class="value-input" type="text" id="valueBox1" data-day-index="1" placeholder="0">
-        </th>
-    </tr>
-    <tr>
-        <th>
-            <img class="logo" src="bicycle.png" alt="Logo 2">
-        </th>
-        <th>
-            <span class="text">Vélo (6 gCO<SUB>2</SUB>/km)</span>
-        </th>
-        <th>
-            <input class="value-input" type="text" id="valueBox2" data-day-index="2" placeholder="0">
-        </th>
-    </tr>
-    <tr>
-        <th>
-            <img class="logo" src="tram.png" alt="Logo 3">
-        </th>
-        <th>
-            <span class="text">Bus/Tram (6.8 gCO<SUB>2</SUB>/km)</span>
-        </th>
-        <th>
-            <input class="value-input" type="text" id="valueBox3" data-day-index="3" placeholder="0">
-        </th>
-    </tr>
-    <tr>
-        <th>
-            <img class="logo" src="train.png" alt="Logo 4">
-        </th>
-        <th>
-            <span class="text">Train (8 gCO<SUB>2</SUB>/km)</span>
-        </th>
-        <th>
-            <input class="value-input" type="text" id="valueBox4" data-day-index="4" placeholder="0">
-        </th>
-    </tr>
-    <tr>
-        <th>
-            <img class="logo" src="electric-bicycle.png" alt="Logo 5">
-        </th>
-        <th>
-            <span class="text">Vélo électrique (22 gCO<SUB>2</SUB>/km)</span>
-        </th>
-        <th>
-            <input class="value-input" type="text" id="valueBox5" data-day-index="5" placeholder="0">
-        </th>
-    </tr>
-    <tr>
-        <th>
-            <img class="logo" src="electric_scooter.png" alt="Logo 6">
-        </th>
-        <th>
-            <span class="text">Scooter électrique (30 gCO<SUB>2</SUB>/km)</span>
-        </th>
-        <th>
-            <input class="value-input" type="text" id="valueBox6" data-day-index="6" placeholder="0">
-        </th>
-    </tr>
-    <tr>
-        <th>
-            <img class="logo" src="motorcycle.png" alt="Logo 9">
-        </th>
-        <th>
-            <span class="text">Scooter thermique (105 gCO<SUB>2</SUB>/km)</span>
-        </th>
-        <th>
-            <input class="value-input" type="text" id="valueBox9" data-day-index="9" placeholder="0">
-        </th>
-    </tr>
-    <tr><!--covoite-->
-        <th></th>
-        <th></th>
-        <th></th>
-        <th style="width:25%; text-align:center;"><span class="text">Je fais du covoiturage</span></th>
 
-    </tr>
-    <tr>
-        <th>
-            <img class="logo" src="AMI.png" alt="Logo 7">
-        </th>
-        <th>
-            <span class="text">Citroën Ami (45 gCO<SUB>2</SUB>/km)</span>
-        </th>
-        <th>
-            <input class="value-input" type="text" id="valueBox7" data-day-index="7" placeholder="0">
-        </th>
-        <th>
-			<label for="radioYes_ami"></label>
-            <input type="checkbox" id="radioYes_ami" name="yesNo_ami" style="--scale-factor: 0.4;">
-		</th>
-		<th style="width:10%;">
-			<div id="peopleCount_ami" class="people-count" style="display: none;">
-				<input type="number" id="peopleInCar_ami"  min="0" max="10">
-			</div>
-		</th>
-    </tr>
-    <tr>
-        <th>
-            <img class="logo" src="zoe.png" alt="Logo 8">
-        </th>
-        <th>
-            <span class="text">Renault Zoe (95 gCO<SUB>2</SUB>/km)</span>
-        </th>
-        <th>
-            <input class="value-input" type="text" id="valueBox8" data-day-index="8" placeholder="0">
-        </th>
-        <th text-align:"center";>
-			<label for="radioYes_zoe"></label>
-			<input type="checkbox" id="radioYes_zoe" name="yesNo_zoe" style="--scale-factor: 0.4;">
-		</th>
-		<th text-align:"center";>
-			<div id="peopleCount_zoe" class="people-count" style="display: none;">
-				<input type="number" id="peopleInCar_zoe"  min="0" max="10">
-			</div>
-		</th>
-    </tr>
-    <tr>
-        <th>
-            <img class="logo" src="tesla.png" alt="Logo 10">
-        </th>
-        <th>
-            <span class="text">Tesla (137 gCO<SUB>2</SUB>/km)</span>
-        </th>
-        <th>
-            <input class="value-input" type="text" id="valueBox10" data-day-index="10" placeholder="0">
-        </th>
-        <th>
-			<label for="radioYes_tesla"></label>
-			<input type="checkbox" id="radioYes_tesla" name="yesNo_tesla" style="--scale-factor: 0.4;">
-		</th>
-		<th>
-			<div id="peopleCount_tesla" class="people-count" style="display: none;">
-				<input type="number" id="peopleInCar_tesla"  min="0" max="10">
-			</div>
-		</th>
-    </tr>
-    <tr>
-        <th>
-            <img class="logo" src="car.png" alt="Logo 11">
-        </th>
-        <th>
-            <span class="text">Citadine thermique (240 gCO<SUB>2</SUB>/km)</span>
-        </th>
-        <th>
-            <input class="value-input" type="text" id="valueBox11" data-day-index="11" placeholder="0">
-        </th>
-        <th>
-			<label for="radioYes_citadine"></label>
-			<input type="checkbox" id="radioYes_citadine" name="yesNo_citadine" style="--scale-factor: 0.4;">
-		</th>
-		<th>
-			<div id="peopleCount_citadine" class="people-count" style="display: none;">
-				<input type="number" id="peopleInCar_citadine"  min="0" max="10">
-			</div>
-		</th>
-    </tr>
-    <tr>
-        <th>
-            <img class="logo" src="SUV.png" alt="Logo 12">
-        </th>
-        <th>
-            <span class="text">SUV (360 gCO<SUB>2</SUB>/km)</span>
-        </th>
-        <th>
-            <input class="value-input" type="text" id="valueBox12" data-day-index="12" placeholder="0">
-        </th>
-        <th>
-			<label for="radioYes_SUV"></label>
-			<input type="checkbox" id="radioYes_SUV" name="yesNo_SUV" style="--scale-factor: 0.4;">
-		</th>
-		<th>
-			<div id="peopleCount_SUV" class="people-count" style="display: none;">
-				<input type="number" id="peopleInCar_SUV"  min="0" max="10">
-			</div>
-		</th>
-</table>
-	<button id="saveValue" class="button-77">Sauvegarder les trajets du jour</button>
-	<button id="calcul_semaine" class="button-77">Calculer &eacutemission hebdomadaire</button>
-    <button id="aide" class="button-77">
-        <i class="fas fa-question-circle"></i> Aide
-    </button>
+<center><button id="mybutton" class="button-77">Nouvelle simulation</button></center>
+
+<center>
+<div class="container" id="container" style="display : none;">
+    
+    <div id="jours">
+        <br/>
+        <button class="days">Lundi</button>
+        <button class="days">Mardi</button>
+        <button class="days">Mercredi</button>
+        <button class="days">Jeudi</button>
+        <button class="days">Vendredi</button>
+        <button class="days">Samedi</button>
+        <button class="days">Dimanche</button>
+        <br/>
+    </div>    
+    <table style="width:100%" >
+        <tr>
+            <th style="width:5%">
+                <img class="logo" src="walking.png" alt="Logo 1">
+            </th>
+            <th style="width:40%">
+                <span class="text">Marche (0 gCO<SUB>2</SUB>/km)</span>
+            </th>
+            <th style="width:15%">
+                <input class="value-input" type="text" id="valueBox1" data-day-index="1" placeholder="0">
+            </th>
+        </tr>
+        <tr>
+            <th>
+                <img class="logo" src="bicycle.png" alt="Logo 2">
+            </th>
+            <th>
+                <span class="text">Vélo (6 gCO<SUB>2</SUB>/km)</span>
+            </th>
+            <th>
+                <input class="value-input" type="text" id="valueBox2" data-day-index="2" placeholder="0">
+            </th>
+        </tr>
+        <tr>
+            <th>
+                <img class="logo" src="tram.png" alt="Logo 3">
+            </th>
+            <th>
+                <span class="text">Bus/Tram (6.8 gCO<SUB>2</SUB>/km)</span>
+            </th>
+            <th>
+                <input class="value-input" type="text" id="valueBox3" data-day-index="4" placeholder="0">
+            </th>
+        </tr>
+        <tr>
+            <th>
+                <img class="logo" src="train.png" alt="Logo 4">
+            </th>
+            <th>
+                <span class="text">Train (8 gCO<SUB>2</SUB>/km)</span>
+            </th>
+            <th>
+                <input class="value-input" type="text" id="valueBox4" data-day-index="4" placeholder="0">
+            </th>
+        </tr>
+        <tr>
+            <th>
+                <img class="logo" src="electric-bicycle.png" alt="Logo 5">
+            </th>
+            <th>
+                <span class="text">Vélo électrique (22 gCO<SUB>2</SUB>/km)</span>
+            </th>
+            <th>
+                <input class="value-input" type="text" id="valueBox5" data-day-index="5" placeholder="0">
+            </th>
+        </tr>
+        <tr>
+            <th>
+                <img class="logo" src="electric_scooter.png" alt="Logo 6">
+            </th>
+            <th>
+                <span class="text">Scooter électrique (30 gCO<SUB>2</SUB>/km)</span>
+            </th>
+            <th>
+                <input class="value-input" type="text" id="valueBox6" data-day-index="6" placeholder="0">
+            </th>
+        </tr>
+        <tr>
+            <th>
+                <img class="logo" src="motorcycle.png" alt="Logo 9">
+            </th>
+            <th>
+                <span class="text">Scooter thermique (105 gCO<SUB>2</SUB>/km)</span>
+            </th>
+            <th>
+                <input class="value-input" type="text" id="valueBox9" data-day-index="9" placeholder="0">
+            </th>
+        </tr>
+        <tr><!--covoite-->
+            <th></th>
+            <th></th>
+            <th></th>
+            <th style="width:25%; text-align:center;"><span class="text">Je fais du covoiturage</span></th>
+
+        </tr>
+        <tr>
+            <th>
+                <img class="logo" src="AMI.png" alt="Logo 7">
+            </th>
+            <th>
+                <span class="text">Citroën Ami (45 gCO<SUB>2</SUB>/km)</span>
+            </th>
+            <th>
+                <input class="value-input" type="text" id="valueBox7" data-day-index="7" placeholder="0">
+            </th>
+            <th>
+                <label for="radioYes_ami"></label>
+                <input type="checkbox" id="radioYes_ami" name="yesNo_ami" style="--scale-factor: 0.4;">
+            </th>
+            <th>
+                <div class="container_number" id="peopleCount_ami" style="display : none;">
+                    <button_number id="decrement_ami" onclick="stepper(this)"> - </button_number>
+                    <input type="number" min="2" max="2" step="1" value="2" id="my-input_ami" readonly>
+                    <button_number id="increment_ami" onclick="stepper(this)"> + </button_number>
+                </div>
+            </th>
+        </tr>
+        <tr>
+            <th>
+                <img class="logo" src="zoe.png" alt="Logo 8">
+            </th>
+            <th>
+                <span class="text">Renault Zoe (95 gCO<SUB>2</SUB>/km)</span>
+            </th>
+            <th>
+                <input class="value-input" type="text" id="valueBox8" data-day-index="8" placeholder="0">
+            </th>
+            <th>
+                <label for="radioYes_zoe"></label>
+                <input type="checkbox" id="radioYes_zoe" name="yesNo_zoe" style="--scale-factor: 0.4;">
+            </th>
+            <th>
+                <div class="container_number" id="peopleCount_zoe" style="display : none;">
+                    <button_number id="decrement_zoe" onclick="stepper(this)"> - </button_number>
+                    <input type="number" min="2" max="5" step="1" value="2" id="my-input_zoe" readonly>
+                    <button_number id="increment_zoe" onclick="stepper(this)"> + </button_number>
+                </div>
+            </th>
+        </tr>
+        <tr>
+            <th>
+                <img class="logo" src="tesla.png" alt="Logo 10">
+            </th>
+            <th>
+                <span class="text">Tesla (137 gCO<SUB>2</SUB>/km)</span>
+            </th>
+            <th>
+                <input class="value-input" type="text" id="valueBox10" data-day-index="10" placeholder="0">
+            </th>
+            <th>
+                <label for="radioYes_tesla"></label>
+                <input type="checkbox" id="radioYes_tesla" name="yesNo_tesla" style="--scale-factor: 0.4;">
+            </th>
+            <th>
+                <div class="container_number" id="peopleCount_tesla" style="display : none;">
+                    <button_number id="decrement_tesla" onclick="stepper(this)"> - </button_number>
+                    <input type="number" min="2" max="7" step="1" value="2" id="my-input_tesla" readonly>
+                    <button_number id="increment_tesla" onclick="stepper(this)"> + </button_number>
+                </div>
+            </th>
+        </tr>
+        <tr>
+            <th>
+                <img class="logo" src="car.png" alt="Logo 11">
+            </th>
+            <th>
+                <span class="text">Citadine thermique (240 gCO<SUB>2</SUB>/km)</span>
+            </th>
+            <th>
+                <input class="value-input" type="text" id="valueBox11" data-day-index="11" placeholder="0">
+            </th>
+            <th>
+                <label for="radioYes_citadine"></label>
+                <input type="checkbox" id="radioYes_citadine" name="yesNo_citadine" style="--scale-factor: 0.4;">
+            </th>
+            <th>
+                <div class="container_number" id="peopleCount_citadine" style="display : none;">
+                    <button_number id="decrement_citadine" onclick="stepper(this)"> - </button_number>
+                    <input type="number" min="2" max="5" step="1" value="2" id="my-input_citadine" readonly>
+                    <button_number id="increment_citadine" onclick="stepper(this)"> + </button_number>
+                </div>
+            </th>
+        </tr>
+        <tr>
+            <th>
+                <img class="logo" src="SUV.png" alt="Logo 12">
+            </th>
+            <th>
+                <span class="text">SUV (360 gCO<SUB>2</SUB>/km)</span>
+            </th>
+            <th>
+                <input class="value-input" type="text" id="valueBox12" data-day-index="12" placeholder="0">
+            </th>
+            <th>
+                <label for="radioYes_SUV"></label>
+                <input type="checkbox" id="radioYes_SUV" name="yesNo_SUV" style="--scale-factor: 0.4;">
+            </th>
+            <th>
+                <div class="container_number" id="peopleCount_SUV" style="display : none;">
+                    <button_number id="decrement_SUV" onclick="stepper(this)"> - </button_number>
+                    <input type="number" min="2" max="8" step="1" value="2" id="my-input_SUV" readonly>
+                    <button_number id="increment_SUV" onclick="stepper(this)"> + </button_number>
+                </div>
+            </th>
+    </table>
+    <button id="saveValue" class="button-77">Sauvegarder les trajets du jour</button>
+    <button id="calcul_semaine" class="button-77">Calculer &eacutemission hebdomadaire</button>
+    <button id="aide" class="button-77"><i class="fas fa-question-circle"></i> Aide</button>
 </div>
 
+<center>
 <br/>
+
 <div id="totalEmissionContainer">
     <span class="text" id="totalWeeklyEmission">Total Emission Hebdomadaire: 0 gCO2</span>
     <img class="logo" id="emissionLogo" src="co2.png" alt="Emission Logo">
 </div>
+</center>
 
 <br/>
 <div id="transportEmissions"></div>
@@ -275,8 +288,19 @@
     </div>
 </div>
 
+<div class="row col-12" style="position: flex; bottom:0px; text-align: left; width:100%; background:#ececec; height: 70px">
+        <div class="col-10">
+            <small class="form-text text-muted"> © 2021. This work is licensed under a <a rel="license" href="https://creativecommons.org/publicdomain/zero/1.0/">CC0 1.0 license</a>. <br><span>Created by
+                    Q.Rogliardo and H. Corcelle</span><br>
+                Icons made by <a href="https://www.freepik.com" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></small>
+        </div>
+        <div class="col-2">
+            <a rel="license" href="https://creativecommons.org/publicdomain/zero/1.0/"><img alt="Creative Commons Public Domain Dedication" style="border-width:0" src="https://licensebuttons.net/l/zero/1.0/88x31.png"></a>
+        </div>
+    </div>
+
 </body>
 </html>
 
-<link rel="stylesheet" href="/styles.css">
+
 <script type="text/javascript" src="scripts.js"></script>
