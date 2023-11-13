@@ -5,9 +5,9 @@ const emissionFactors = {
     "Train": 8,
     "Vélo électrique": 22,
     "Scooter électrique": 30,
+	"Scooter thermique": 105,
     "Citroën Ami": 45,
     "Renault Zoe": 95,
-    "Scooter thermique": 105,
     "Tesla": 137,
     "Citadine thermique": 240,
     "SUV": 360 
