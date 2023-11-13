@@ -11,6 +11,16 @@ p {
   text-align: center;
 }
 
+h3 {
+	font-family: Poppins;
+	font-size: 18 px;
+	text-align: center;
+	font-style: italic;
+	font-weight: normal;
+	color : #F3450A;
+	 
+}
+
 hw {
   color: #fd5312;
   text-align: center;
@@ -43,6 +53,9 @@ center {
   text-align: center;
   justify-content: center;
 }
+
+
+
 
 .newtrajet {
         display: inline-block;
@@ -118,7 +131,7 @@ center {
 }
 
 #container {
-            max-width: 820px; /* Adjust the width as needed */
+            max-width: 900px; /* Adjust the width as needed */
             height: 800x; /* Adjust the height as needed */
             border: 5px solid #fc7c4b;
             padding: 5px;
@@ -134,7 +147,7 @@ center {
 		.logo {
 			width: 45px; /* Adjust the logo width as needed */
 			margin-right: 10px; /* Add spacing between logo and input */
-      margin-left: 10px;
+			margin-left: 10px;
 			transition: transform .2s; /* Animation */
 		}	
 		
@@ -365,9 +378,6 @@ center {
   color: #c3c2c7;
   cursor: pointer;
 }
-
-
-
 
 
 

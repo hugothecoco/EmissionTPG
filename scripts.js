@@ -5,7 +5,7 @@ const emissionFactors = {
     "Train": 8,
     "Vélo électrique": 22,
     "Scooter électrique": 30,
-	"Scooter thermique": 105,
+    "Scooter thermique": 105,
     "Citroën Ami": 45,
     "Renault Zoe": 95,
     "Tesla": 137,
@@ -13,7 +13,7 @@ const emissionFactors = {
     "SUV": 360 
 };
 
-function updateEmissionFactors() {
+/*function updateEmissionFactors() {
     const amiValue = parseInt(document.getElementById("my-input_ami").value);
     const zoeValue = parseInt(document.getElementById("my-input_zoe").value);
     const teslaValue = parseInt(document.getElementById("my-input_tesla").value);
@@ -33,6 +33,7 @@ document.getElementById("my-input_zoe").addEventListener("input", updateEmission
 document.getElementById("my-input_tesla").addEventListener("input", updateEmissionFactors);
 document.getElementById("my-input_citadine").addEventListener("input", updateEmissionFactors);
 document.getElementById("my-input_SUV").addEventListener("input", updateEmissionFactors);
+*/
 
 // Function to calculate the total emission for a day considering updated emission factors
 function calculateEmissionForDay(day) {
@@ -41,22 +42,34 @@ function calculateEmissionForDay(day) {
         return 0; // No values for this day
     }
 
-    // Calculate the total emission for the day with the updated emission factors
     const totalEmission = values.reduce((total, value, index) => {
-        const transport = Object.keys(emissionFactors)[index];
-        const emissionFactor = emissionFactors[transport];
-        return total + (value * emissionFactor);
+    const transport = Object.keys(emissionFactors)[index];
+    var emissionFactor;
+    if (transport in passengers[day]) {
+        emissionFactor = emissionFactors[transport] / passengers[day][transport];
+    } else {
+        emissionFactor = emissionFactors[transport];
+    }
+    return total + (value * emissionFactor);
     }, 0);
 
     return totalEmission;
 }
 
-// Function to update the displayed total emission for the selected day
+var passengers = {"Lundi":{},"Mardi": {},"Mercredi": {},"Jeudi": {}, "Vendredi": {}, "Samedi":{}, "Dimanche":{}}
+
 function updateTotalEmission(day) {
     const totalEmission = calculateEmissionForDay(day);
     const dayDiv = document.querySelector(`[data-day="${day}"]`);
     const totalEmissionDisplay = dayDiv.querySelector(".total-emission");
-    totalEmissionDisplay.textContent = `Total Emission: ${totalEmission.toFixed(2)} gCO2`;
+    //totalEmissionDisplay.textContent = `Total Emission: ${totalEmission.toFixed(2)} gCO2`;
+
+    const amiValue = parseInt(document.getElementById("my-input_ami").value);
+    const zoeValue = parseInt(document.getElementById("my-input_zoe").value);
+    const teslaValue = parseInt(document.getElementById("my-input_tesla").value);
+    const citadineValue = parseInt(document.getElementById("my-input_citadine").value);
+    const suvValue = parseInt(document.getElementById("my-input_SUV").value);
+    passengers[day] = { "Citroën Ami": amiValue, "Renault Zoe": zoeValue, "Tesla": teslaValue, "Citadine thermique": citadineValue, "SUV": suvValue }
 }
 
 document.getElementById("calcul_semaine").addEventListener("click", function() {
@@ -65,7 +78,7 @@ document.getElementById("calcul_semaine").addEventListener("click", function() {
     totalEmissionContainer.style.display = "inline";
 
     // Update the emission factors before calculating the total week emission
-    updateEmissionFactors();
+    //updateEmissionFactors();
 
     // Call the function to update the total emission
     updateTotalWeekEmission();
@@ -121,6 +134,90 @@ function displayValuesForDay(selectedDayButton) {
         const value = dayValues[day] ? dayValues[day][index] : "";
         valueBox.value = value;
     });
+    if (passengers[day]["Citroën Ami"]) {
+        if ((passengers[day]["Citroën Ami"]>1 && !document.getElementById("radioYes_ami").checked) || (passengers[day]["Citroën Ami"]==1 && document.getElementById("radioYes_ami").checked)){
+            document.getElementById("radioYes_ami").click()
+        }
+ 
+        if (passengers[day]["Citroën Ami"] > 1) {
+            document.getElementById("my-input_ami").value = passengers[day]["Citroën Ami"];
+        } else {
+            document.getElementById("my-input_ami").value = 1;
+        }
+ 
+    } else {
+        if (document.getElementById("radioYes_ami").checked){
+            document.getElementById("radioYes_ami").click()
+        }
+    }
+ 
+    if (passengers[day]["Renault Zoe"]) {
+ 
+        if ((passengers[day]["Renault Zoe"]>1 && !document.getElementById("radioYes_zoe").checked) || (passengers[day]["Renault Zoe"]==1 && document.getElementById("radioYes_zoe").checked)){
+            document.getElementById("radioYes_zoe").click()
+        }
+        if (passengers[day]["Renault Zoei"] > 1) {
+            document.getElementById("my-input_zoe").value = passengers[day]["Renault Zoei"];
+        } else {
+            document.getElementById("my-input_zoe").value = 1;
+        }
+ 
+ 
+    } else {
+        if (document.getElementById("radioYes_zoe").checked){
+            document.getElementById("radioYes_zoe").click()
+        }
+    }
+ 
+    if (passengers[day]["Tesla"]) {
+ 
+        if ((passengers[day]["Tesla"]>1 && !document.getElementById("radioYes_tesla").checked) || (passengers[day]["Tesla"]==1 && document.getElementById("radioYes_tesla").checked)){
+            document.getElementById("radioYes_tesla").click()
+        }
+        if (passengers[day]["Tesla"] > 1) {
+            document.getElementById("my-input_tesla").value = passengers[day]["Tesla"];
+        } else {
+            document.getElementById("my-input_tesla").value = 1;
+        }
+ 
+    } else {
+        if (document.getElementById("radioYes_tesla").checked){
+            document.getElementById("radioYes_tesla").click()
+        }
+    }
+ 
+    if (passengers[day]["Citadine thermique"]) {
+        if ((passengers[day]["Citadine thermique"]>1 && !document.getElementById("radioYes_citadine").checked) || (passengers[day]["Citadine thermique"]==1 && document.getElementById("radioYes_citadine").checked)){
+            document.getElementById("radioYes_citadine").click()
+        }
+ 
+        if (passengers[day]["Citadine thermique"] > 1) {
+            document.getElementById("my-input_citadine").value = passengers[day]["Citadine thermique"];
+        } else {
+            document.getElementById("my-input_citadine").value = 1;
+        }
+ 
+    } else {
+        if (document.getElementById("radioYes_citadine").checked){
+            document.getElementById("radioYes_citadine").click()
+        }
+    }
+ 
+    if (passengers[day]["SUV"]) {
+        if ((passengers[day]["SUV"]>1 && !document.getElementById("radioYes_SUV").checked) || (passengers[day]["SUV"]==1 && document.getElementById("radioYes_SUV").checked)){
+            document.getElementById("radioYes_SUV").click()
+        }
+ 
+        if (passengers[day]["SUV"] > 1) {
+            document.getElementById("my-input_SUV").value = passengers[day]["SUV"];
+        } else {
+            document.getElementById("my-input_SUV").value = 1;
+        }
+    } else {
+        if (document.getElementById("radioYes_SUV").checked){
+            document.getElementById("radioYes_SUV").click()
+        }
+    }
 }
 
 // Function to save the values for the selected day
@@ -140,7 +237,8 @@ document.getElementById("saveValue").addEventListener("click", function () {
         //alert(`Values saved for ${day}: ${values}`);
 
         // Update the saved values and total emission on the page
-        updateSavedValues(day);
+        //updateSavedValues(day);
+
         updateTotalEmission(day);
     }
 });
@@ -278,7 +376,7 @@ function createAideWarning() {
 					<li>Entrer les distances parcourues en km pour les transports utilis&eacutes</li>
 					<li>En cas de covoiturage, cliquer sur le bouton et indiquer le nombre de passagers</li>
 					<li>Sauvegarder les trajets du jour</li>
-					<li>R&eacutep&eacuteter le meme proc&eacuted&eacute pour chaque jour de la semaine</li>
+					<li>R&eacutep&eacuteter le m&ecircme proc&eacuted&eacute pour chaque jour de la semaine</li>
 					<li>Calculer l'&eacutemission hebdomadaire</li>
 				</ul>
 			</pw>
